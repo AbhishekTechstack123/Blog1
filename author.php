@@ -1,7 +1,7 @@
 <?php
 
 include "files/config.php";
-$article_query = "SELECT * FROM `articles` JOIN users ON articles. Author_id = users.id";
+
 
 ?>
 
@@ -32,7 +32,7 @@ $article_query = "SELECT * FROM `articles` JOIN users ON articles. Author_id = u
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Articles</a>
@@ -44,26 +44,39 @@ $article_query = "SELECT * FROM `articles` JOIN users ON articles. Author_id = u
               </div>
             </nav>         
         </div>
-        <div class="col-12 col-sm-8 col-md-6 offset-sm-2 offset-md-3 mt-3 mb-3">
-          
-              <h1 class="display-4 text-center">All articles</h1>
-              <?php
-
-                $result = mysqli_query($link, $article_query);
-                while($row = mysqli_fetch_assoc($result)){
-                  echo '<div class="article_summary">
-                      <h1>'.$row["Post_title"].'</h1>
-                      <p>Date: '.$row["Created_at"].'</p>
-                      <p>Category: '.$row["Ctg"].'</p>
-                      <p>Author: '.$row["Name"].'</p>
-                      <p class="mt-3">
-                        '.$row["Post"].'
-                      </p>
-                    </div> <!-- article_summary -->';
-
-                      }
-              ?>              
-        </div>
+        <div class="col-12">
+            <div class="text-center display-2 mt-2">Add a new article</div>
+            <div class="col-12 col-sm-8 col-md-6 offset-sm-2 offset-md-3 mt-3">
+                  <form id="add_post" action="files/action.php" method="POST">
+                    <div class="form-group">
+                      <label for="exampleFormControlInput1">Post title</label>
+                      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title" name="post_title">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Category</label>
+                      <select class="form-control" id="exampleFormControlSelect1" name="post_cat">
+                        <option value="Travel">Travel</option>
+                        <option value="Food">Food</option>
+                        <option value="Fashion">Fashion</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlTextarea1">Article</label>
+                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="post_article"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlInput2">Image</label>
+                      <input type="text" class="form-control w-50" id="exampleFormControlInput2" name="post_image">
+                    </div>
+                    <div class="form-group">
+                    <input type="hidden" name="add_post_form" value="1">
+                    <div id="res_msg" class="text-center font-weight-bold"></div>
+                    <input type="submit" class="form-control w-auto btn btn-primary" id="exampleFormControlInput3">
+                    </div>
+                    <div class="mb-5"></div>
+                  </form>
+            </div> <!-- col-12 -->
+        </div> <!-- col-12 -->
       </div> <!--row-->
 
       <div class="row">

@@ -1,0 +1,14 @@
+#signup-form input{
+        margin-bottom:20px;
+        margin-left:50px;
+    }
+
+.navbar-nav .nav-item a{
+	cursor: pointer !important;
+}
+.article_summary{
+	border:1px solid gray;
+	padding: 15px;
+	margin-top: 15px;
+
+}
