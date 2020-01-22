@@ -10,5 +10,13 @@
 	border:1px solid gray;
 	padding: 15px;
 	margin-top: 15px;
+	box-shadow: 
+}
 
+.sign-text{
+	font-weight: bold;
+	cursor: pointer;
+}
+.login_container{
+	display: none;
 }

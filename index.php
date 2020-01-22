@@ -1,7 +1,16 @@
 <?php
 
 include "files/config.php";
+session_start();
 $article_query = "SELECT * FROM `articles` JOIN users ON articles. Author_id = users.id";
+
+if(isset($_SESSION["USER_NAME"]) && !empty($_SESSION["USER_NAME"])){
+  $login_status = true;
+  $display_name = "Hello ".$_SESSION["USER_NAME"]."!";
+}
+else{
+  $login_status = false;
+}
 
 ?>
 
@@ -37,9 +46,21 @@ $article_query = "SELECT * FROM `articles` JOIN users ON articles. Author_id = u
                   <li class="nav-item">
                     <a class="nav-link" href="#">Articles</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="signup-trigger" data-toggle="modal" data-target="#signup-modal">Sign up</a>
-                  </li>
+                  <?php
+                  if($login_status){
+                     echo '<li class="nav-item">
+                                <a class="nav-link logout-trigger" href="files/logout.php"> 
+                                Logout'." ".$display_name.'</a>
+                            </li>';
+
+                  }else{
+                   echo ' <li class="nav-item">
+                            <a class="nav-link" id="signup-trigger" data-toggle="modal" data-target="#signup-modal">
+                             Sign up
+                            </a>
+                          </li>';
+                  }
+                  ?>
                 </ul>
               </div>
             </nav>         
@@ -77,7 +98,8 @@ $article_query = "SELECT * FROM `articles` JOIN users ON articles. Author_id = u
                 </button>
               </div>
               <div class="modal-body">
-                    <form id="signup-form" action="files/signup.php" method="POST">
+                <div class="signup_container">
+                   <form id="signup-form" action="files/signup.php" method="POST">
             
                       <input type="text" placeholder="Name" name="fullname">
                       <br>
@@ -92,10 +114,26 @@ $article_query = "SELECT * FROM `articles` JOIN users ON articles. Author_id = u
                       <input type="text" placeholder="Confirm Password" name="urepass">
                       <br>
                       <div class="signup-msg text-danger font-weight-bold"></div>
-                      <input type="submit">
+                      <input type="submit" value="Sign Up">
+                      <br>
+                      <div>Already a user? <span class="sign-text">sign-in</span> instead!</div>
 
                     </form>
-              </div>
+                </div> <!-- signup_container -->   
+                <div class="login_container">
+                    <form id="login-form" action="files/action.php" method="POST">
+                      <input type="text" placeholder="Email/Phone" class="mb-3" name="loginusername">
+                      <br>
+                      <input type="text" class="mb-3" name="loginpass">
+                      <br>
+                      <input type="hidden" name="login-form-submit" value=1>
+                      <input type="submit" class="btn btn-submit">
+                      <br>
+                      <div>New user? <span class="sign-text">sign-up</span> instead!</div>
+                    </form>
+                  
+                </div>    <!-- login_container -->
+              </div> <!--modal-body-->
             </div>
           </div>
         </div>

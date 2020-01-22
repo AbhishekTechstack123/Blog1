@@ -39,6 +39,27 @@ $( document ).ready(function() {
 
     }); //sign-up fom submit
 
+    $("#login-form").submit(function(e) {
+
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+            // $(".signup-msg").html("");
+            var form = $(this);
+            var form_url = form.attr('action');
+            var form_type = form.attr('method');
+            $.ajax({
+                   type: form_type,
+                   url: form_url,
+                   data: form.serialize(), // serializes the form's elements.
+                   success: function(data)
+                   {
+                       $('#signup-modal').modal('hide');
+                       location.reload();
+                       // $(".response_msg").text(data + " Check out our new articles!");
+
+                   }
+                 });
+           }); //sign-up fom submit
+
 
     $("#add_post").submit(function(e) {
 
@@ -60,6 +81,14 @@ $( document ).ready(function() {
 
         });
     }); //add_post fom submit
+
+    //toggle login
+    $(".sign-text").click(function(){
+        $(".signup_container").toggle();
+        $(".login_container").toggle();
+    });
+
+
 
 }); //document ready
 

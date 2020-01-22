@@ -69,9 +69,9 @@ include "files/config.php";
                       <input type="text" class="form-control w-50" id="exampleFormControlInput2" name="post_image">
                     </div>
                     <div class="form-group">
-                    <input type="hidden" name="add_post_form" value="1">
                     <div id="res_msg" class="text-center font-weight-bold"></div>
-                    <input type="submit" class="form-control w-auto btn btn-primary" id="exampleFormControlInput3">
+                    <input type="hidden" name="add_post_form" value=1>
+                    <input type="submit" class="form-control w-auto btn btn-primary" id="exampleFormControlInput3" value="Submit">
                     </div>
                     <div class="mb-5"></div>
                   </form>
