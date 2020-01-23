@@ -131,6 +131,8 @@ else{
                       <br>
                       <div>New user? <span class="sign-text">sign-up</span> instead!</div>
                     </form>
+
+
                   
                 </div>    <!-- login_container -->
               </div> <!--modal-body-->

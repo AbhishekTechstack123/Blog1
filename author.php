@@ -1,7 +1,13 @@
 <?php
 
 include "files/config.php";
+session_start();
+if(isset($_SESSION["USER_ROLE"]) && isset($_SESSION["USER_NAME"])){
+  if($_SESSION["USER_ROLE"] == 2){
+    header("Location: index.php");
+  }
 
+}
 
 ?>
 

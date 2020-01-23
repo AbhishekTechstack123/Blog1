@@ -23,6 +23,7 @@ if (isset($_POST["login-form-submit"]) && !empty($_POST["login-form-submit"])) {
 	$loginpass = mysqli_real_escape_string($link, $_POST["loginpass"]);
 
 	$query1 = "SELECT * FROM users WHERE Email = '$loginuser' OR phone = '$loginuser'";
+
 	$result = mysqli_query($link,$query1);
 	if($result){
 		$row = mysqli_fetch_assoc($result);
@@ -36,7 +37,9 @@ if (isset($_POST["login-form-submit"]) && !empty($_POST["login-form-submit"])) {
 			$row2 = mysqli_fetch_assoc($result2);
 			$stored_pass = $row2["Pwd"];
 			if(md5($loginpass) === $stored_pass){
+				//successful login
 				$_SESSION["USER_NAME"] = $user_display_name;
+				$_SESSION["USER_ROLE"] = $row["Role"];
 			}
 			else{
 				echo "Failure";
@@ -46,5 +49,23 @@ if (isset($_POST["login-form-submit"]) && !empty($_POST["login-form-submit"])) {
 
 }
 
+
+if (isset($_POST["updatepostform"]) && !empty($_POST["updatepostform"])) {
+
+
+	$newpost = mysqli_real_escape_string($link, $_POST["newpost"]);
+	$articleid = mysqli_real_escape_string($link, $_POST["articleid"]);
+
+	$changepostquery = "UPDATE articles SET Post = '$newpost' WHERE article_id = $articleid";
+	if(mysqli_query($link,$changepostquery)){
+		echo "Article changed successfully!";
+	}
+	else{
+		echo $changepostquery;
+		echo("Error description: " . mysqli_error($link));
+
+	}
+
+}
 
 ?>

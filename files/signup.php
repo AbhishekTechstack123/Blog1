@@ -10,6 +10,7 @@ $pass = $_POST["upass"];
 $urepass = $_POST["urepass"];
 
 
+//Role id 2 is for user
 $query = "INSERT INTO `users`(`Name`, `U_Name`, `Role`, `Email`, `phone`) VALUES ('$name', '$uname', 2,'$email', '$phone')";
 
 $result = mysqli_query($link, $query);

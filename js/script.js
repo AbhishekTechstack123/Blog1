@@ -58,7 +58,8 @@ $( document ).ready(function() {
 
                    }
                  });
-           }); //sign-up fom submit
+           }); //login fom submit
+      
 
 
     $("#add_post").submit(function(e) {
@@ -88,6 +89,37 @@ $( document ).ready(function() {
         $(".login_container").toggle();
     });
 
+
+    
+    $(".modify-post").click(function(){
+
+        var targetrowid = $(this).attr("post-id");
+        $("#"+targetrowid).toggle();
+
+        
+    }); //modify post
+
+
+    $(".updatepost").submit(function(e) {
+
+          e.preventDefault(); // avoid to execute the actual submit of the form.
+            var form = $(this);
+            var form_url = "files/action.php";
+            var form_type = form.attr('method');
+            $.ajax({
+                   type: form_type,
+                   url: form_url,
+                   data: form.serialize(), // serializes the form's elements.
+                   success: function(data)
+                   {  
+                      alert(data);
+                      console.log(data);
+                   }
+
+        });
+
+
+    });
 
 
 }); //document ready
