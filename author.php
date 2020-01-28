@@ -6,7 +6,9 @@ if(isset($_SESSION["USER_ROLE"]) && isset($_SESSION["USER_NAME"])){
   if($_SESSION["USER_ROLE"] == 2){
     header("Location: index.php");
   }
-
+}
+else{
+  header("Location: index.php");
 }
 
 ?>
@@ -51,6 +53,7 @@ if(isset($_SESSION["USER_ROLE"]) && isset($_SESSION["USER_NAME"])){
             </nav>         
         </div>
         <div class="col-12">
+            <?php echo "Welcome ".$_SESSION["USER_NAME"]; ?>
             <div class="text-center display-2 mt-2">Add a new article</div>
             <div class="col-12 col-sm-8 col-md-6 offset-sm-2 offset-md-3 mt-3">
                   <form id="add_post" action="files/action.php" method="POST">

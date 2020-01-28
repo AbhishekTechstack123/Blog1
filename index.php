@@ -2,7 +2,7 @@
 
 include "files/config.php";
 session_start();
-$article_query = "SELECT * FROM `articles` JOIN users ON articles. Author_id = users.id";
+$article_query = "SELECT * FROM `articles` JOIN users ON articles. Author_id = users.id LIMIT 3";
 
 if(isset($_SESSION["USER_NAME"]) && !empty($_SESSION["USER_NAME"])){
   $login_status = true;
@@ -65,12 +65,13 @@ else{
               </div>
             </nav>         
         </div>
-        <div class="col-12 col-sm-8 col-md-6 offset-sm-2 offset-md-3 mt-3 mb-3">
-          
+        <div class="col-12 col-sm-8 col-md-6 offset-sm-1 offset-md-2 mt-3 mb-3">
+            
               <h1 class="display-4 text-center">All articles</h1>
               <?php
 
                 $result = mysqli_query($link, $article_query);
+                $row_counter = 0;
                 while($row = mysqli_fetch_assoc($result)){
                   echo '<div class="article_summary">
                       <h1>'.$row["Post_title"].'</h1>
@@ -83,8 +84,30 @@ else{
                     </div> <!-- article_summary -->';
 
                       }
-              ?>              
+              ?> 
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+              </nav>             
         </div>
+        <div class="col-sm-2 border mt-3">
+          <h2 class="text-center">Categories</h2>
+          <ul>
+              <?php 
+              $category_query = "SELECT DISTINCT Ctg FROM articles";
+              $result = mysqli_query($link, $category_query);
+              while ( $row = mysqli_fetch_assoc($result)) {
+                echo '<li>'.$row["Ctg"].'</li>';
+              }
+           ?>
+          </ul>
+        </div>
+
       </div> <!--row-->
 
       <div class="row">
@@ -134,7 +157,7 @@ else{
 
 
                   
-                </div>    <!-- login_container -->
+                </div>   <!-- login_container -->
               </div> <!--modal-body-->
             </div>
           </div>

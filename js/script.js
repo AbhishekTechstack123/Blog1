@@ -117,7 +117,36 @@ $( document ).ready(function() {
                    }
 
         });
+    });
 
+    $(".search-user").submit(function(e){
+      // $(".usersearch-response").html("");
+      e.preventDefault(); // avoid to execute the actual submit of the form.
+      var form = $(this);
+      var form_url = form.attr("action");
+      var form_type = form.attr('method');
+      var form_data = form.serialize();
+       $.ajax({
+                   type: form_type,
+                   url: form_url,
+                   data: form_data, // serializes the form's elements.
+                   success: function(data)
+                   { 
+                    $("#userresponse-table tbody").html("");
+                    var data = JSON.parse(data);
+                    // console.log(data);
+                    // console.log(data["status"] == "User found");
+                    if(data["status"] == "User found"){
+                    for(i = 0;i < Object.keys(data).length - 1;i++){
+                      $("#userresponse-table tbody").append("<tr><td>"+data[i]["Name"]+"</td><td>"+data[i]["phone"]+"</td><td>"+data[i]["Email"]+"</td><td>"+data[i]["Code"]+"</td></tr>");  
+                      }
+                    }
+                    else{
+                      $("#userresponse-table tbody").html("<tr><td>"+data["status"]+"</td></tr>");
+                    }
+                   }
+
+        });
 
     });
 

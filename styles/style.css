@@ -21,7 +21,18 @@
 	display: none;
 }
 
-/*.modifyposttable tbody td{
-	padding:15px;
-	width:50px;
+/*.modifyposttable  tr td:nth-last-child(1){
+	text-align: center;
 }*/
+
+.modifyposttable textarea{
+	width: 100%;
+	height: 200px;
+	border: none;
+}
+#ttt::after{
+	content: "HELLO";
+}
+#userresponse-table{
+	margin:auto;
+}
