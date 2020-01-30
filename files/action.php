@@ -91,9 +91,32 @@ if (isset($_POST["search_user_form"]) && !empty($_POST["search_user_form"])) {
 		
 	}
 		echo json_encode($all_results);
-	} //while
+	} 
+
+if (isset($_POST["page"]) && !empty($_POST["page"])) {
+					
+		$current_page = mysqli_real_escape_string($link, $_POST["page"]);
+		$math = (int)$current_page*3 - 3;
+
+		$page_query = "SELECT * FROM articles JOIN users ON users.id=articles.Author_id LIMIT $math,3";
+		$result = mysqli_query($link,$page_query);
+
+		if(!mysqli_num_rows($result)){
+			$response = array('status'=>'fail');
+		}
+		else{
+			$response=array('status'=>'success');
+			while($row = mysqli_fetch_assoc($result)){
+				array_push($response,$row);
+			}
+
+		}
+	
 
 
+		// $response = array('page'=>$current_page,'QUERY'=>$page_query);
+		echo json_encode($response);
 
+}
 
 ?>

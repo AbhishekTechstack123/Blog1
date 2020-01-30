@@ -38,7 +38,6 @@ $allposts = "SELECT * FROM articles JOIN users ON articles.Author_id = users.id 
 				<div class="col-12 text-center">
 					<button>Modify existing posts</button>
 					<button>Change roles</button>
-					<button>Moderate comments</button>
 				</div>
 		</div> <!-- row -->
 		<div class="row mt-5">

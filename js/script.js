@@ -150,6 +150,41 @@ $( document ).ready(function() {
 
     });
 
+    //pagination function
+
+    $(".page-link").click(function(){
+
+       var page =  $(this).attr("data-value");
+       if(page=="0"){
+              
+       }
+       else{
+              var form_url = "files/action.php";
+              var form_type = "POST";
+               $.ajax({
+                           type: form_type,
+                           url: form_url,
+                           data: {
+                                  "page":page
+                               },
+                           success: function(data)
+                           { 
+                            $(".page-link").parent().removeClass("active");
+                            $(this).parent().addClass("active");
+                            var data = JSON.parse(data);
+                            if(data.status == "success"){
+                             $(".show-articles").html("");
+                                for(i = 0;i <= 2;i++){
+                                  var article_html = '<div class="article_summary"><h1>'+data[i]["Post_title"]+'</h1><p>Date:'+data[i]["Created_at"]+'</p><p>Category:'+data[i]["Ctg"]+'</p><p>Author:'+data[i]["Name"]+'</p><p class="mt-3">'+data[i]["Post"]+'</p></div>';
+                                  $(".show-articles").append(article_html);
+                                 }//for
+                            }//if
+                           }//success
+
+                });
+       }
+    });
+
 
 }); //document ready
 

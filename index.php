@@ -68,7 +68,8 @@ else{
         <div class="col-12 col-sm-8 col-md-6 offset-sm-1 offset-md-2 mt-3 mb-3">
             
               <h1 class="display-4 text-center">All articles</h1>
-              <?php
+              <div class="show-articles">
+                  <?php
 
                 $result = mysqli_query($link, $article_query);
                 $row_counter = 0;
@@ -84,14 +85,16 @@ else{
                     </div> <!-- article_summary -->';
 
                       }
-              ?> 
+                ?> 
+              </div>
+              
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                  <li class="page-item"><a data-value=0 class="page-link" href="#">Previous</a></li>
+                  <li class="page-item active"><a data-value=1 class="page-link">1</a></li>
+                  <li class="page-item"><a data-value=2 class="page-link">2</a></li>
+                  <li class="page-item"><a data-value=3 class="page-link">3</a></li>
+                  <li class="page-item"><a data-value=0 class="page-link">Next</a></li>
                 </ul>
               </nav>             
         </div>
